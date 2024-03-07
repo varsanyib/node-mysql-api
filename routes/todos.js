@@ -68,7 +68,7 @@ router.post('/', async (req, res) => {
             await database.connect();
         }
         //SQL execute
-        const [result] = await database.connection.execute("INSERT INTO `todos` (`title`, `details`, `completed`) VALUES (?, ?, ?);", [values.title, values.details, values.completed]);
+        const [result] = await database.connection.execute("INSERT INTO `todos` (`title`, `details`, `completed`) VALUES (?, ?, ?);", [(values.title).substring(0, 254), (values.details).substring(0, 999), values.completed]);
         
         if (result.affectedRows > 0) {
             return res.status(201).json({ success: true, result: {id: result.insertId}, message: `Task created successfully!`,  timestamp: Date.now()});
@@ -107,7 +107,7 @@ router.put('/:id', async (req, res) => {
             await database.connect();
         }
         //SQL execute
-        const [result] = await database.connection.execute("UPDATE `todos` SET `title` = ?, `details` = ?, `completed` = ? WHERE `todos`.`id` = ?", [values.title, values.details, values.completed, id]);
+        const [result] = await database.connection.execute("UPDATE `todos` SET `title` = ?, `details` = ?, `completed` = ? WHERE `todos`.`id` = ?", [(values.title).substring(0, 254), (values.details).substring(0, 999), values.completed, id]);
         
         if (result.affectedRows > 0) {
             return res.status(200).json({ success: true, result: {id: id}, message: `Task modified successfully!`,  timestamp: Date.now()});
