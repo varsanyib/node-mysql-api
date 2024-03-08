@@ -19,7 +19,7 @@ app.use('/todo', require("./routes/todos"));
 
 //Default error message for unknown request - HTTP 404!
 app.use(function(req, res) {
-  res.status(404).json({ success: false, result: null, message: `404 Nem található!`,  timestamp: Date.now()});
+  res.status(404).json({ success: false, result: null, message: `Not found!`,  timestamp: Date.now()});
 });
 
 //API Runtime
