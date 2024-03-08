@@ -57,10 +57,10 @@ router.post('/', async (req, res) => {
         if (!req.is('application/json')) {
             return res.status(400).json({ success: false, result: null, message: `Invalid content type! Only JSON format accepted.`, timestamp: Date.now()});
         }
-        //POST parameters in body
-        const values = req.body;
+        //POST parameters in body (keys convert to lowercase)
+        const values = Object.fromEntries(Object.entries(req.body).map(([key, value]) => [key.toLowerCase(), value]));
         //Check required post keys
-        if (!required_keys.every(x => x in values)) {
+        if (required_keys.filter(key => !(key in values)).length > 0) {
             return res.status(400).json({ success: false, result: null, message: `Missing required keys in data!`, timestamp: Date.now()});
         }
         //Connecting database, if needed
@@ -96,10 +96,10 @@ router.put('/:id', async (req, res) => {
         if (id == null || id.length == 0) {
             return res.status(400).json({ success: false, result: null, message: `Invalid task ID!`, timestamp: Date.now()});
         }
-        //PUT parameters in body
-        const values = req.body;
-        //Check required post keys
-        if (!required_keys.every(x => x in values)) {
+        //PUT parameters in body (keys convert to lowercase)
+        const values = Object.fromEntries(Object.entries(req.body).map(([key, value]) => [key.toLowerCase(), value]));
+        //Check required PUT keys
+        if (required_keys.filter(key => !(key in values)).length > 0) {
             return res.status(400).json({ success: false, result: null, message: `Missing required keys in data!`, timestamp: Date.now()});
         }
         //Connecting database, if needed
