@@ -46,25 +46,25 @@ or
 
 #### VUCIR informations
 
-```http
+```
   GET /
 ```
 
 #### Technologies (MySQL) self-test
 
-```http
+```
   GET /selftest
 ```
 
 #### List all tasks
 
-```http
+```
   GET /todo
 ```
 
 #### List specific task by ID
 
-```http
+```
   GET /todo/{id}
 ```
 | Parameter | Type     | Description                |
@@ -73,7 +73,7 @@ or
 
 #### Create task
 
-```http
+```
   POST /todo/
 ```
 | Parameter | Type     | Description                |
@@ -87,7 +87,7 @@ or
 
 #### Modify specific task data
 
-```http
+```
   PUT /todo/{id}
 ```
 | Parameter | Type     | Description                |
@@ -102,7 +102,7 @@ or
 
 #### Delete specific task
 
-```http
+```
   DELETE /todo/{id}
 ```
 | Parameter | Type     | Description                |
