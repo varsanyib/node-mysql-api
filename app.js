@@ -4,10 +4,13 @@ const config = require('./config');
 const cors = require('cors');
 const app = express();
 
-
 //BodyParser Settings
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use((err, req, res, next) => {
+  if (err) return res.status(400).json({ success: false, result: null, message: `Invalid body value in request!`,  timestamp: Date.now()});
+  else next();
+});
 
 //CORS settings
 app.use(cors());
